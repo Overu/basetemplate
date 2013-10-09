@@ -3,18 +3,19 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-      <groupId>com.vanke</groupId>
-      <artifactId>vanke</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.vanke</groupId>
+    <artifactId>vanke</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>vanke_launch</artifactId>
-  <packaging>apk</packaging>
+  <artifactId>vanke_main</artifactId>
+  <packaging>apklib</packaging>
 
   <dependencies>
-    <!-- android sdk -->  
+    <!-- android sdk -->
     <dependency>
       <groupId>com.google.android</groupId>
       <artifactId>android</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>android.support</groupId>
@@ -34,14 +35,14 @@
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
         <artifactId>android-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <attachNativeArtifacts>true</attachNativeArtifacts>
+        </configuration>
       </plugin>
     </plugins>
   </build>
