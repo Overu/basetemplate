@@ -7,14 +7,14 @@
 
     <!-- 主页面 HomeActivity 顶部title的布局（title文字和关于按钮） -->
 
-    <include layout="@layout/title_layout" />
+    <!-- <include layout="@layout/title_layout" /> -->
 
     <LinearLayout
         android:id="@+id/activity_home_rightbtns_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="35dp"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -59,6 +59,8 @@
             android:orientation="horizontal" >
 
             <ImageButton
+                android:id="@+id/stop_button"
+                android:tag="stop_button_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/stop_button_bg_selector" />

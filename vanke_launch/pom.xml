@@ -3,15 +3,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-      <groupId>com.vanke</groupId>
-      <artifactId>vanke</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.vanke</groupId>
+    <artifactId>vanke</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>vanke_launch</artifactId>
   <packaging>apk</packaging>
 
   <dependencies>
-    <!-- android sdk -->  
+    <!-- android sdk -->
     <dependency>
       <groupId>com.google.android</groupId>
       <artifactId>android</artifactId>
@@ -20,7 +20,7 @@
       <groupId>android.support</groupId>
       <artifactId>compatibility-v13</artifactId>
     </dependency>
-    
+
     <!-- vanke main lib -->
     <dependency>
       <groupId>com.vanke</groupId>
@@ -30,15 +30,8 @@
     </dependency>
 
     <!-- guice -->
-    <!-- <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-      <classifier>no_aop</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.roboguice</groupId>
-      <artifactId>roboguice</artifactId>
-    </dependency> -->
+    <!-- <dependency> <groupId>com.google.inject</groupId> <artifactId>guice</artifactId> <classifier>no_aop</classifier> </dependency> <dependency> 
+      <groupId>org.roboguice</groupId> <artifactId>roboguice</artifactId> </dependency> -->
   </dependencies>
 
   <build>
