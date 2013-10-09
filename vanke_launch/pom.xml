@@ -20,6 +20,12 @@
       <groupId>android.support</groupId>
       <artifactId>compatibility-v13</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.vanke</groupId>
+      <artifactId>vanke_main</artifactId>
+      <version>${project.version}</version>
+      <type>apklib</type>
+    </dependency>
 
     <!-- guice -->
     <dependency>
