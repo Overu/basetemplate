@@ -10,14 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:orientation="vertical" >
 
         <ImageButton
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:background="@drawable/create_parking_button_bg_selector" />
+            android:layout_gravity="center"
+            android:background="@null"
+            android:scaleType="fitEnd"
+            android:adjustViewBounds="true"
+            android:src="@drawable/create_parking_button_bg_selector" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@drawable/middle_parking_image_bg" />
+
+        <ImageButton
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/find_parking_button_bg_selector" />
     </LinearLayout>
 
 </RelativeLayout>
