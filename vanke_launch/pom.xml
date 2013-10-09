@@ -20,6 +20,8 @@
       <groupId>android.support</groupId>
       <artifactId>compatibility-v13</artifactId>
     </dependency>
+    
+    <!-- vanke main lib -->
     <dependency>
       <groupId>com.vanke</groupId>
       <artifactId>vanke_main</artifactId>
@@ -28,7 +30,7 @@
     </dependency>
 
     <!-- guice -->
-    <dependency>
+    <!-- <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
       <classifier>no_aop</classifier>
@@ -36,7 +38,7 @@
     <dependency>
       <groupId>org.roboguice</groupId>
       <artifactId>roboguice</artifactId>
-    </dependency>
+    </dependency> -->
   </dependencies>
 
   <build>

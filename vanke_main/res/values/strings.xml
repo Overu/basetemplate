@@ -1,5 +1,9 @@
 <resources>
 
-    <string name="app_name">wanke_launch</string>
+    <string name="app_name">vanke</string>
+    
+    <string name="string_activity_home_title_layout_textview">万科展厅</string>
+    
+    <string name="string_activity_home_message_title">展品名称</string>
 
 </resources>
