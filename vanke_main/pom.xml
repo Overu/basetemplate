@@ -18,9 +18,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>android.support</groupId>
-      <artifactId>compatibility-v13</artifactId>
-    </dependency>
+        <groupId>com.google.android</groupId>
+        <artifactId>support-v4</artifactId>
+      </dependency>
 
     <!-- guice -->
     <dependency>
@@ -36,6 +36,7 @@
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
     </dependency>
+
   </dependencies>
 
   <build>

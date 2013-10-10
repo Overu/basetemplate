@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
-            android:scaleType="fitEnd"
+            android:scaleType="fitStart"
             android:adjustViewBounds="true"
             android:src="@drawable/create_parking_button_bg_selector" />
 

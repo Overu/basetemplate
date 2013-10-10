@@ -9,13 +9,15 @@
     
     <ImageButton
         android:id="@+id/activity_home_title_layout_btn_back"
-        android:tag="activity_home_title_layout_btn_back_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/icon_back"
+        android:paddingRight="15dp"
         android:visibility="invisible"
-        android:background="@drawable/icon_back" />
+        android:tag="activity_home_title_layout_btn_back_tag" />
 
     <TextView
         android:id="@+id/activity_home_title_layout_textview"

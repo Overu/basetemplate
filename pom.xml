@@ -37,9 +37,9 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>android.support</groupId>
-        <artifactId>compatibility-v13</artifactId>
-        <version>13</version>
+        <groupId>com.google.android</groupId>
+        <artifactId>support-v4</artifactId>
+        <version>r7</version>
       </dependency>
 
       <!-- guice -->

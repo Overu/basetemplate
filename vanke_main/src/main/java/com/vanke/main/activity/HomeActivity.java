@@ -3,21 +3,12 @@ package com.vanke.main.activity;
 import android.os.Bundle;
 import com.vanke.main.activity.R;
 import com.vanke.main.utils.SimpleProgressDialog;
-
 import javax.annotation.Nullable;
-
 import android.content.DialogInterface;
-
-import android.content.DialogInterface;
-
 import android.view.View.OnClickListener;
-
 import android.widget.ImageButton;
-
 import roboguice.inject.InjectView;
-
 import android.content.Intent;
-
 import android.view.View;
 
 public class HomeActivity extends PublicActivity implements OnClickListener {
@@ -28,6 +19,9 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   @InjectView(tag = "message_button_tag")
   @Nullable
   ImageButton mMessageButton;
+  @InjectView(tag = "more_button_tag")
+  @Nullable
+  ImageButton mMoreButton;
 
   private Intent mHomeIntent;
 
@@ -46,6 +40,8 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
         }
       });
+    } else if (id == R.id.more_button) {
+      mHomeIntent = new Intent(this, DetailActivity.class);
     }
 
     if (mHomeIntent == null) {
@@ -71,6 +67,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
     mStopButton.setOnClickListener(this);
     mMessageButton.setOnClickListener(this);
+    mMoreButton.setOnClickListener(this);
   }
 
 }
