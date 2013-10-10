@@ -79,10 +79,21 @@
                     android:layout_height="250dp"
                     android:tag="pager_tag" />
 
+                <com.vanke.main.view.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:tag="indicator_tag"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dip" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="店铺介绍:" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_activity_about_layout_intro" />
             </LinearLayout>
         </com.vanke.main.view.ScrollViewExtend>
     </LinearLayout>

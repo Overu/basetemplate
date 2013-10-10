@@ -1,16 +1,3 @@
-/*
- * Copyright (C) 2010 The Android Open Source Project
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
- * obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
-
 package com.vanke.main.utils;
 
 import org.apache.http.HttpEntity;
@@ -43,16 +30,11 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * This helper class download images from the Internet and binds those with the provided ImageView.
  * 
- * <br>
- * 从网路下载图片并填充给指定的ImageView
- * 
  * <p>
- * It requires the INTERNET permission, which should be added to your application's manifest file. <br>
- * 使用该类需要在manifest配置文件中添加 INTERNET 权限。
- * <p>
+ * It requires the INTERNET permission, which should be added to your application's manifest file.
+ * </p>
  * 
- * A local cache of downloaded images is maintained internally to improve performance. <br>
- * 会维护一份本地的cache以改善性能。
+ * A local cache of downloaded images is maintained internally to improve performance.
  */
 public class ImageDownloader {
   public enum Mode {
@@ -199,7 +181,7 @@ public class ImageDownloader {
     return null;
   }
 
-  private Mode mode = Mode.CORRECT;
+  private Mode mode = Mode.NO_ASYNC_TASK;
 
   // Hard cache, with a fixed maximum capacity and a life duration
   private final HashMap<String, Bitmap> sHardBitmapCache = new LinkedHashMap<String, Bitmap>(HARD_CACHE_CAPACITY / 2, 0.75f, true) {
@@ -270,7 +252,9 @@ public class ImageDownloader {
     final HttpGet getRequest = new HttpGet(url);
 
     try {
+      Log.w("ImageDownloader", "abcd");
       HttpResponse response = client.execute(getRequest);
+      Log.w("ImageDownloader", "abcdef");
       final int statusCode = response.getStatusLine().getStatusCode();
       if (statusCode != HttpStatus.SC_OK) {
         Log.w("ImageDownloader", "Error " + statusCode + " while retrieving bitmap from " + url);
