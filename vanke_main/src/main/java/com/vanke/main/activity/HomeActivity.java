@@ -2,6 +2,7 @@ package com.vanke.main.activity;
 
 import android.os.Bundle;
 import com.vanke.main.activity.R;
+import com.vanke.main.utils.Constant;
 import com.vanke.main.utils.SimpleProgressDialog;
 import javax.annotation.Nullable;
 import android.content.DialogInterface;
@@ -25,6 +26,9 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   @InjectView(tag = "activity_home_layout_map_button_tag")
   @Nullable
   ImageButton mMapButton;
+  @InjectView(tag = "activity_home_layout_button_location_tag")
+  @Nullable
+  ImageButton mLoactionButton;
 
   private Intent mHomeIntent;
 
@@ -37,6 +41,9 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
       mHomeIntent = new Intent(this, ParkingActivity.class);
     } else if (id == R.id.activity_home_layout_map_button) {
       mHomeIntent = new Intent(this, MapActivity.class);
+    } else if (id == R.id.activity_home_layout_button_location) {
+      mHomeIntent = new Intent(this, MapActivity.class);
+      mHomeIntent.putExtra(Constant.LOCATION, Constant.LOCATION);
     } else if (id == R.id.activity_home_layout_message_button) {
       SimpleProgressDialog.show(this, new DialogInterface.OnCancelListener() {
 
@@ -74,6 +81,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
     mMessageButton.setOnClickListener(this);
     mMoreButton.setOnClickListener(this);
     mMapButton.setOnClickListener(this);
+    mLoactionButton.setOnClickListener(this);
   }
 
 }

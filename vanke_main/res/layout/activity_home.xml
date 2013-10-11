@@ -24,6 +24,8 @@
             android:orientation="horizontal" >
 
             <ImageButton
+                android:id="@+id/activity_home_layout_button_location"
+                android:tag="activity_home_layout_button_location_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/location_button_bg_selector" />

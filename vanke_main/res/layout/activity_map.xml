@@ -9,12 +9,13 @@
     android:padding="0dp"
     android:splitMotionEvents="true" >
 
-    <!-- <com.macrowen.macromap.MacroMap
-        android:id="@+id/macroMap1"
+    <com.macrowen.macromap.MacroMap
+        android:id="@+id/acntivity_map_layout_macromap"
+        android:tag="acntivity_map_layout_macromap_tag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
-        android:padding="0dp" /> -->
+        android:padding="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +25,8 @@
         android:orientation="horizontal" >
 
         <ImageButton
-            android:id="@+id/button_position"
+            android:id="@+id/acntivity_map_button_position"
+            android:tag="acntivity_map_button_position_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/shop_detail_margin"
@@ -39,7 +41,8 @@
             android:textSize="12sp" />
 
         <ImageButton
-            android:id="@+id/button_zoomout"
+            android:id="@+id/acntivity_map_button_zoomout"
+            android:tag="acntivity_map_button_zoomout_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/shop_detail_margin"
@@ -47,7 +50,8 @@
             android:src="@drawable/zoom_out_button_bg_selector" />
 
         <ImageButton
-            android:id="@+id/button_zoomin"
+            android:id="@+id/acntivity_map_button_zoomin"
+            android:tag="acntivity_map_button_zoomin_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/shop_detail_margin"
