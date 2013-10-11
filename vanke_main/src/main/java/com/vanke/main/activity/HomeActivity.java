@@ -13,15 +13,18 @@ import android.view.View;
 
 public class HomeActivity extends PublicActivity implements OnClickListener {
 
-  @InjectView(tag = "stop_button_tag")
+  @InjectView(tag = "activity_home_layout_stop_button_tag")
   @Nullable
   ImageButton mStopButton;
-  @InjectView(tag = "message_button_tag")
+  @InjectView(tag = "activity_home_layout_message_button_tag")
   @Nullable
   ImageButton mMessageButton;
-  @InjectView(tag = "more_button_tag")
+  @InjectView(tag = "activity_home_layout_more_button_tag")
   @Nullable
   ImageButton mMoreButton;
+  @InjectView(tag = "activity_home_layout_map_button_tag")
+  @Nullable
+  ImageButton mMapButton;
 
   private Intent mHomeIntent;
 
@@ -30,9 +33,11 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
     int id = v.getId();
     mHomeIntent = null;
 
-    if (id == R.id.stop_button) {
+    if (id == R.id.activity_home_layout_stop_button) {
       mHomeIntent = new Intent(this, ParkingActivity.class);
-    } else if (id == R.id.message_button) {
+    } else if (id == R.id.activity_home_layout_map_button) {
+      mHomeIntent = new Intent(this, MapActivity.class);
+    } else if (id == R.id.activity_home_layout_message_button) {
       SimpleProgressDialog.show(this, new DialogInterface.OnCancelListener() {
 
         @Override
@@ -40,7 +45,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
         }
       });
-    } else if (id == R.id.more_button) {
+    } else if (id == R.id.activity_home_layout_more_button) {
       mHomeIntent = new Intent(this, DetailActivity.class);
     }
 
@@ -68,6 +73,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
     mStopButton.setOnClickListener(this);
     mMessageButton.setOnClickListener(this);
     mMoreButton.setOnClickListener(this);
+    mMapButton.setOnClickListener(this);
   }
 
 }

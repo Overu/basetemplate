@@ -1,0 +1,3 @@
+[submodule "GDRealtime"]
+        path = MapRender
+        url = https://github.com/Overu/MapRender.git

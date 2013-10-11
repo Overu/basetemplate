@@ -5,28 +5,16 @@ import com.google.inject.Inject;
 import com.vanke.main.utils.ImageDownloader;
 import com.vanke.main.utils.ImageDownloader.Mode;
 import com.vanke.main.view.CirclePageIndicator;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nullable;
-
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-
 import android.widget.ImageView;
-
 import android.view.LayoutInflater;
-
 import android.view.ViewGroup;
-
 import android.view.View;
-
 import android.support.v4.view.PagerAdapter;
-
 import android.support.v4.view.ViewPager;
-
 import roboguice.inject.InjectView;
-
 import android.os.Bundle;
 
 public class DetailActivity extends PublicActivity {
@@ -99,5 +87,6 @@ public class DetailActivity extends PublicActivity {
     mPager.setAdapter(adapter);
 
     mIndicator.setViewPager(mPager);
+    mIndicator.setSnap(true);
   }
 }

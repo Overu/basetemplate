@@ -35,5 +35,6 @@
     </style>
     
     <color name="link_color">#2547f6</color>
+    <color name="shop_detail_title_color">#3366cc</color>
 
 </resources>

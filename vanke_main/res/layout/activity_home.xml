@@ -34,6 +34,8 @@
                 android:layout_weight="1" />
 
             <ImageButton
+                android:id="@+id/activity_home_layout_map_button"
+                android:tag="activity_home_layout_map_button_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/map_button_bg_selector" />
@@ -59,8 +61,8 @@
             android:orientation="horizontal" >
 
             <ImageButton
-                android:id="@+id/stop_button"
-                android:tag="stop_button_tag"
+                android:id="@+id/activity_home_layout_stop_button"
+                android:tag="activity_home_layout_stop_button_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/stop_button_bg_selector" />
@@ -71,8 +73,8 @@
                 android:layout_weight="1" />
 
             <ImageButton
-                android:id="@+id/more_button"
-                android:tag="more_button_tag"
+                android:id="@+id/activity_home_layout_more_button"
+                android:tag="activity_home_layout_more_button_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/more_button_bg_selector" />
@@ -83,8 +85,8 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/message_button"
-                android:tag="message_button_tag"
+                android:id="@+id/activity_home_layout_message_button"
+                android:tag="activity_home_layout_message_button_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

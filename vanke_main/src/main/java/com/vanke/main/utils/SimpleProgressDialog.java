@@ -2,8 +2,6 @@ package com.vanke.main.utils;
 
 import com.vanke.main.activity.R;
 
-import android.view.Window;
-
 import android.app.Dialog;
 
 import android.content.Context;
