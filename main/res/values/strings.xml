@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">vanke</string>
-    <string name="string_activity_home_title_layout_textview">万科展厅</string>
+    <string name="string_activity_home_title_layout_textview">金色半山</string>
     <string name="string_activity_home_message_title">展品名称</string>
     <string name="detail_button_home_name">主页</string>
     <string name="detail_button_location_name">查看位置</string>

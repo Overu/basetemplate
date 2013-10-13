@@ -1,4 +1,4 @@
-package com.palmap.vanke.exhibition.activity;
+package com.palmap.jinse.exhibition.activity;
 
 import com.palmap.main.activity.HomeActivity;
 
