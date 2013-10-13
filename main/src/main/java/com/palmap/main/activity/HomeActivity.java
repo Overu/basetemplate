@@ -66,7 +66,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
-    setTitle("万科展厅");
+    setTitle(this.getResources().getString(R.string.string_activity_home_title_layout_textview));
 
     setDetailButtonListener(new View.OnClickListener() {
 
