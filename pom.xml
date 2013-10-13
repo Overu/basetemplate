@@ -7,8 +7,8 @@
     <artifactId>oss-parent</artifactId>
     <version>7</version>
   </parent>
-  <groupId>com.vanke</groupId>
-  <artifactId>vanke</artifactId>
+  <groupId>com.palmap</groupId>
+  <artifactId>parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -125,8 +125,8 @@
     </pluginManagement>
   </build>
 
-  <modules>
+  <!-- <modules>
     <module>vanke_launch</module>
     <module>vanke_main</module>
-  </modules>
+  </modules> -->
 </project>

@@ -1,6 +1,6 @@
-package com.vanke.exhibition.activity;
+package com.palmap.vanke.exhibition.activity;
 
-import com.vanke.main.activity.HomeActivity;
+import com.palmap.main.activity.HomeActivity;
 
 import android.content.Intent;
 

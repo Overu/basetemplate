@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="app_name">vanke</string>
+    <string name="string_activity_home_title_layout_textview">万科展厅</string>
+    <string name="string_activity_home_message_title">展品名称</string>
+    <string name="detail_button_home_name">主页</string>
+    <string name="detail_button_location_name">查看位置</string>
+    <string name="detail_button_navigation_name">导航</string>
+    <string name="string_activity_about_layout_intro">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;万科企业股份有限公司成立于1984年，1988年进入房地产行业，1991年成为深圳证券交易所第二家上市公司。经过二十多年的发展，成为国内最大的住宅开发企业，目前业务覆盖珠三角、长三角、环渤海三大城市经济圈以及中西部地区，共计53个大中城市。近三年来，年均住宅销售规模在6万套以上，2011年公司实现销售面积1075万平米，销售金额1215亿元，2012年销售额超过1400亿。销售规模持续居全球同行业首位。</string>
+    <string name="string_activity_about_layout_web_name">网站</string>
+    <string name="string_activity_about_layout_web_content">http://www.vanke.com/</string>
+    <string name="string_activity_about_layout_phone_name">电话</string>
+    <string name="string_activity_about_layout_phone_content">0512 53203999</string>
+
+</resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vanke.exhibition.activity"
+    package="com.palmap.vanke.exhibition.activity"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -32,23 +32,23 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="com.vanke.main.activity.HomeActivity"
+            android:name="com.palmap.main.activity.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
         <activity 
-            android:name="com.vanke.main.activity.AboutActivity"
+            android:name="com.palmap.main.activity.AboutActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
         <activity 
-            android:name="com.vanke.main.activity.ParkingActivity"
+            android:name="com.palmap.main.activity.ParkingActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
         <activity 
-            android:name="com.vanke.main.activity.DetailActivity"
+            android:name="com.palmap.main.activity.DetailActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
         <activity 
-            android:name="com.vanke.main.activity.MapActivity"
+            android:name="com.palmap.main.activity.MapActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
     </application>
