@@ -1,11 +1,28 @@
 package com.palmap.main.activity;
 
+import com.google.inject.Inject;
+
 import com.macrowen.macromap.MacroMap;
+import com.macrowen.macromap.MacroMap.MapLoadStatus;
 import com.macrowen.macromap.MacroMap.OnMapEventListener;
 import com.macrowen.macromap.MacroMap.OnMapEventType;
 import com.macrowen.macromap.MacroMap.OnMapFloorChangedListener;
+import com.macrowen.macromap.MacroMap.OnMapLoadStatusChangeListener;
 import com.palmap.main.utils.Constant;
+import com.palmap.main.utils.WifiPositionController;
+import com.siemens.wifiposition.Position;
+import com.siemens.wifiposition.PositionListener;
+import com.siemens.wifiposition.ServiceStateListener;
+import com.siemens.wifiposition.WifiPositionManager;
+
+import java.util.List;
+
 import javax.annotation.Nullable;
+
+import android.util.Log;
+
+import android.net.wifi.ScanResult;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -14,7 +31,7 @@ import android.view.MotionEvent;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class MapActivity extends PublicActivity {
+public class MapActivity extends PublicActivity implements OnMapLoadStatusChangeListener, PositionListener {
 
   @InjectView(tag = "acntivity_map_layout_macromap_tag")
   @Nullable
@@ -29,6 +46,43 @@ public class MapActivity extends PublicActivity {
   @Nullable
   ImageButton mPosition;
 
+  // @Inject
+  // WifiPositionManager wifiPosManager;
+
+  @Inject
+  WifiPositionController wifiController;
+
+  @Override
+  public void onAlarm(String arg0) {
+    Log.w("onAlarm", arg0);
+  }
+
+  @Override
+  public void onAPInfo(List<ScanResult> arg0) {
+  }
+
+  @Override
+  public void onError(int arg0) {
+    Log.w("onError", String.valueOf(arg0));
+  }
+
+  @Override
+  public void onMapLoadStatusChange(MapLoadStatus arg0) {
+  }
+
+  @Override
+  public void onNotification(int arg0) {
+    Log.w("onNotification", String.valueOf(arg0));
+  }
+
+  @Override
+  public void onPositionReceived(Position position, String arg1) {
+    if (position == null) {
+      return;
+    }
+    Log.w("onPositionReceived", position.x + "_" + position.y);
+  }
+
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     mMacroMap.dispatchTouchEvent(event);
@@ -42,8 +96,23 @@ public class MapActivity extends PublicActivity {
     setTitle("地图");
     enableBack(true);
 
-    mMacroMap.setMall("3", "商场");
-    mMacroMap.setMall("3");
+    mMacroMap.setMall("1", "商场");
+    mMacroMap.setMall("1");
+
+    // String serverIp = getResources().getString(R.string.position_server_adress);
+    // int serverProt = Integer.parseInt(getResources().getString(R.string.position_server_port));
+    // wifiPosManager.init(serverIp, serverProt, this);
+    // wifiPosManager.setPositionInterval(1000);
+    //
+    // wifiPosManager.setServiceStateListener(new ServiceStateListener() {
+    //
+    // @Override
+    // public void onStateChanged(int arg0) {
+    // Log.w("onStateChanged", arg0 + "");
+    // }
+    // });
+
+    mMacroMap.setOnMapLoadStatusChangeListener(this);
 
     mMacroMap.setOnMapEventListener(new OnMapEventListener() {
       @Override
@@ -88,15 +157,28 @@ public class MapActivity extends PublicActivity {
   }
 
   @Override
+  protected void onDestroy() {
+    if (wifiController.isConnection()) {
+      wifiController.stop();
+    }
+    super.onDestroy();
+  }
+
+  @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
+    mMacroMap.setOnMapLoadStatusChangeListener(this);
   }
 
   private void location() {
-    String floorid = "18";
-    float x = 15202;
-    float y = 7447;
-    mMacroMap.setPosition(floorid, x, y);
+    if (wifiController.isConnection()) {
+      return;
+    }
+    wifiController.start();
+    // String floorid = "18";
+    // float x = 15202;
+    // float y = 7447;
+    // mMacroMap.setPosition(floorid, x, y);
   }
 
   private void processLoaction(Intent intent) {

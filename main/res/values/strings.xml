@@ -11,5 +11,7 @@
     <string name="string_activity_about_layout_web_content">http://www.vanke.com/</string>
     <string name="string_activity_about_layout_phone_name">电话</string>
     <string name="string_activity_about_layout_phone_content">0512 53203999</string>
-
+    
+    <string name="position_server_adress">175.102.11.172</string>
+    <string name="position_server_port">9001</string>
 </resources>
