@@ -8,12 +8,16 @@ import com.palmap.main.utils.SimpleProgressDialog;
 import javax.annotation.Nullable;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import roboguice.inject.InjectView;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.Region;
+import android.graphics.Region.Op;
 import android.view.View;
 
 public class HomeActivity extends PublicActivity implements OnClickListener {
@@ -46,6 +50,17 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
     if (id == R.id.activity_home_layout_stop_button) {
       float x = 15202;
       float y = 7447;
+      Rect rect = new Rect(15, 15, 140, 70);
+      Region region = new Region(rect);
+      Region region1 = new Region(new Rect(15, 15, 260, 120));
+      Log.w("region", region.toString());
+      Log.w("region1", region1.toString());
+      if (region.quickReject(region1)) {
+        Log.w("aaaaaaaaaaa", "aa");
+        return;
+      }
+      Log.w("bbbbbbbbbbb", "bbb");
+
       mMapService.getShopsByScope(x, y, 100);
       // mHomeIntent = new Intent(this, ParkingActivity.class);
     } else if (id == R.id.activity_home_layout_map_button) {
