@@ -2,9 +2,13 @@ package com.palmap.main.activity;
 
 import android.os.Bundle;
 
+import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.Constant;
 import com.palmap.main.utils.SimpleProgressDialog;
 import javax.annotation.Nullable;
+
+import android.util.DisplayMetrics;
+
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -32,13 +36,18 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
   private Intent mHomeIntent;
 
+  private MapService mMapService = MapService.getInstance();
+
   @Override
   public void onClick(View v) {
     int id = v.getId();
     mHomeIntent = null;
 
     if (id == R.id.activity_home_layout_stop_button) {
-      mHomeIntent = new Intent(this, ParkingActivity.class);
+      float x = 15202;
+      float y = 7447;
+      mMapService.getShopsByScope(x, y, 100);
+      // mHomeIntent = new Intent(this, ParkingActivity.class);
     } else if (id == R.id.activity_home_layout_map_button) {
       mHomeIntent = new Intent(this, MapActivity.class);
     } else if (id == R.id.activity_home_layout_button_location) {
@@ -77,11 +86,29 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
       }
     });
 
+    if (mMapService.getMap() != null) {
+      this.parseMapData();
+    }
+
     mStopButton.setOnClickListener(this);
     mMessageButton.setOnClickListener(this);
     mMoreButton.setOnClickListener(this);
     mMapButton.setOnClickListener(this);
     mLoactionButton.setOnClickListener(this);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mMapService.destory();
+    mMapService = null;
+    android.os.Process.killProcess(android.os.Process.myPid());
+  }
+
+  private void parseMapData() {
+    DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+    mMapService.setDelegateMeasure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+    mMapService.parseMapData(null);
   }
 
 }
