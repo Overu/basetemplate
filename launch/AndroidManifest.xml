@@ -61,6 +61,10 @@
             android:name="com.palmap.main.activity.MapActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"></activity>
+        <activity 
+            android:name="com.palmap.main.activity.BrandWallActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

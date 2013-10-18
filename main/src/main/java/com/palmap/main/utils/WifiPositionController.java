@@ -10,6 +10,8 @@ import com.siemens.wifiposition.WifiPositionManager;
 
 import java.util.List;
 
+import android.util.Log;
+
 import android.net.wifi.ScanResult;
 
 import android.content.res.Resources;
@@ -27,15 +29,18 @@ public class WifiPositionController implements PositionListener {
 
   private PositionListenerDelegate listener;
 
+  private String serverIp;
+  private int serverProt;
+
   @Inject
   public WifiPositionController(WifiPositionManager wifiPosMananger, Resources resource) {
     this.wifiPosMananger = wifiPosMananger;
-    String serverIp = resource.getString(R.string.position_server_adress);
-    int serverProt = Integer.parseInt(resource.getString(R.string.position_server_port));
-    wifiPosMananger.init(serverIp, serverProt, this);
+    serverIp = resource.getString(R.string.position_server_adress);
+    serverProt = Integer.parseInt(resource.getString(R.string.position_server_port));
   }
 
   public void destory() {
+    stop();
     wifiPosMananger.destroy();
   }
 
@@ -45,7 +50,7 @@ public class WifiPositionController implements PositionListener {
 
   @Override
   public void onAlarm(String arg0) {
-
+    Log.w("onAlarm", arg0 + "");
   }
 
   @Override
@@ -55,12 +60,13 @@ public class WifiPositionController implements PositionListener {
 
   @Override
   public void onError(int arg0) {
+    Log.w("onError", arg0 + "");
 
   }
 
   @Override
   public void onNotification(int arg0) {
-
+    Log.w("onNotification", arg0 + "");
   }
 
   @Override
@@ -77,6 +83,8 @@ public class WifiPositionController implements PositionListener {
       return;
     }
     isConnection = true;
+    wifiPosMananger.init(serverIp, serverProt, this);
+    wifiPosMananger.setPositionInterval(2000);
     wifiPosMananger.start();
   }
 

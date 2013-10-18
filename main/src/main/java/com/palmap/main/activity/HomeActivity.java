@@ -1,23 +1,23 @@
 package com.palmap.main.activity;
 
+import com.google.inject.Inject;
+
 import android.os.Bundle;
 
 import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.Constant;
 import com.palmap.main.utils.SimpleProgressDialog;
+import com.palmap.main.utils.WifiPositionController;
+
 import javax.annotation.Nullable;
 
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import roboguice.inject.InjectView;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.Region;
-import android.graphics.Region.Op;
 import android.view.View;
 
 public class HomeActivity extends PublicActivity implements OnClickListener {
@@ -40,6 +40,9 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
   private Intent mHomeIntent;
 
+  @Inject
+  WifiPositionController wifiPositionController;
+
   private MapService mMapService = MapService.getInstance();
 
   @Override
@@ -48,21 +51,21 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
     mHomeIntent = null;
 
     if (id == R.id.activity_home_layout_stop_button) {
-      float x = 15202;
-      float y = 7447;
-      Rect rect = new Rect(15, 15, 140, 70);
-      Region region = new Region(rect);
-      Region region1 = new Region(new Rect(15, 15, 260, 120));
-      Log.w("region", region.toString());
-      Log.w("region1", region1.toString());
-      if (region.quickReject(region1)) {
-        Log.w("aaaaaaaaaaa", "aa");
-        return;
-      }
-      Log.w("bbbbbbbbbbb", "bbb");
-
-      mMapService.getShopsByScope(x, y, 100);
+      // float x = 15202;
+      // float y = 7447;
+      // Rect rect = new Rect(15, 15, 140, 70);
+      // Region region = new Region(rect);
+      // Region region1 = new Region(new Rect(15, 15, 260, 120));
+      // Log.w("region", region.toString());
+      // Log.w("region1", region1.toString());
+      // if (region.quickReject(region1)) {
+      // Log.w("aaaaaaaaaaa", "aa");
+      // return;
+      // }
+      // Log.w("bbbbbbbbbbb", "bbb");
+      // mMapService.getShopsByScope(x, y, 100);
       // mHomeIntent = new Intent(this, ParkingActivity.class);
+      mHomeIntent = new Intent(this, BrandWallActivity.class);
     } else if (id == R.id.activity_home_layout_map_button) {
       mHomeIntent = new Intent(this, MapActivity.class);
     } else if (id == R.id.activity_home_layout_button_location) {
@@ -115,6 +118,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    wifiPositionController.destory();
     mMapService.destory();
     mMapService = null;
     android.os.Process.killProcess(android.os.Process.myPid());
