@@ -29,6 +29,7 @@
         android:theme="@style/AppTheme" >
         
         <service android:name="com.siemens.wifiposition.PositionService"></service>
+        <service android:name="com.palmap.main.service.NearbyShopService"></service>
         
         <activity 
             android:name=".LaunchActivity"
