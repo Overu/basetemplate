@@ -12,6 +12,9 @@ import com.palmap.main.utils.WifiPositionController;
 import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
 import com.siemens.wifiposition.Position;
 import javax.annotation.Nullable;
+
+import android.os.Handler;
+
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,8 +24,7 @@ import android.view.MotionEvent;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class MapActivity extends PublicActivity implements
-    PositionListenerDelegate {
+public class MapActivity extends PublicActivity implements PositionListenerDelegate {
 
   @InjectView(tag = "acntivity_map_layout_macromap_tag")
   @Nullable
@@ -43,11 +45,21 @@ public class MapActivity extends PublicActivity implements
   @Inject
   WifiPositionController wifiController;
 
+  private Handler mHandler = new Handler();
+
   private MapService mMapService = MapService.getInstance();
 
   @Override
-  public void onPositionReceived(Position position, String arg1) {
+  public void onPositionReceived(final Position position, String floorid) {
     Log.w("onPositionReceived", position.x + "_" + position.y);
+    Log.w("floorid", floorid);
+
+    mHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        mMapService.setPositionTest("29", position.x * 10, position.y * 10);
+      }
+    });
   }
 
   @Override
@@ -141,15 +153,28 @@ public class MapActivity extends PublicActivity implements
     super.onNewIntent(intent);
   }
 
+  @Override
+  protected void onPause() {
+    super.onPause();
+    if (wifiController.isConnection()) {
+      wifiController.stop();
+    }
+  }
+
   private void location() {
-    // if (wifiController.isConnection()) {
-    // return;
-    // }
-    // wifiController.start();
-    String floorid = "19";
-    float x = 15202;
-    float y = 7447;
-    mMapService.setPosition(floorid, x, y);
+    if (wifiController.isConnection()) {
+      return;
+    }
+    wifiController.start();
+    // String floorid = "18";
+    // float x = 15202;
+    // float y = 7447;
+    // String floorid = "18";
+    // float x = 4046;
+    // float y = 1676;
+    // float x = 0;
+    // float y = 0;
+    // mMapService.setPosition(floorid, x, y);
   }
 
   private void processLoaction(Intent intent) {

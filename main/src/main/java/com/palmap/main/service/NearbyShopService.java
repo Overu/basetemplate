@@ -15,24 +15,6 @@ import android.util.Log;
 
 public class NearbyShopService extends Service {
 
-  public interface UpdateNearbyShopData {
-    public void onUpataNearbyShopData(Shop shop);
-  }
-
-  public final static String TAG = "NearbyShopService";
-
-  @Override
-  public IBinder onBind(Intent intent) {
-    return binder;
-  }
-
-  @Override
-  public boolean onUnbind(Intent intent) {
-    timer.cancel();
-    timer.purge();
-    return super.onUnbind(intent);
-  }
-
   public class MyBinder extends Binder {
 
     public NearbyShopService getService() {
@@ -40,25 +22,8 @@ public class NearbyShopService extends Service {
     }
   }
 
-  private Handler mHandler = new Handler();
-  private MapService mMapService = MapService.getInstance();
-  private NearbyShopRunnable mNearbyShopRunnable;
-  private NearbyShoptTimerTask mNearbyShoptTimerTask;
-  private UpdateNearbyShopData mListener;
-  MyBinder binder = new MyBinder();
-  Timer timer;
-
-  private class NearbyShoptTimerTask extends TimerTask {
-
-    @Override
-    public void run() {
-      Log.w(TAG, "NearbyShoptTimerTask");
-      if (mListener == null) {
-        return;
-      }
-      mHandler.post(mNearbyShopRunnable);
-    }
-
+  public interface UpdateNearbyShopData {
+    public void onUpataNearbyShopData(Shop shop);
   }
 
   class NearbyShopRunnable implements Runnable {
@@ -74,17 +39,38 @@ public class NearbyShopService extends Service {
 
   }
 
+  private class NearbyShoptTimerTask extends TimerTask {
+
+    @Override
+    public void run() {
+      Log.w(TAG, "NearbyShoptTimerTask");
+      if (mListener == null) {
+        return;
+      }
+      mHandler.post(mNearbyShopRunnable);
+    }
+
+  }
+
+  public final static String TAG = "NearbyShopService";
+
+  private Handler mHandler = new Handler();
+  private MapService mMapService = MapService.getInstance();
+  private NearbyShopRunnable mNearbyShopRunnable;
+  private NearbyShoptTimerTask mNearbyShoptTimerTask;
+  private UpdateNearbyShopData mListener;
+  MyBinder binder = new MyBinder();
+  Timer timer;
+
+  @Override
+  public IBinder onBind(Intent intent) {
+    return binder;
+  }
+
   @Override
   public void onCreate() {
     super.onCreate();
     Log.w(TAG, "onCreate");
-  }
-
-  public void startHandler() {
-    timer = new Timer(true);
-    mNearbyShoptTimerTask = new NearbyShoptTimerTask();
-    mNearbyShopRunnable = new NearbyShopRunnable();
-    timer.schedule(mNearbyShoptTimerTask, 1000, 10000);
   }
 
   @Override
@@ -99,8 +85,22 @@ public class NearbyShopService extends Service {
     super.onDestroy();
   }
 
+  @Override
+  public boolean onUnbind(Intent intent) {
+    timer.cancel();
+    timer.purge();
+    return super.onUnbind(intent);
+  }
+
   public void setUpdataListener(UpdateNearbyShopData listener) {
     mListener = listener;
+  }
+
+  public void startHandler() {
+    timer = new Timer(true);
+    mNearbyShoptTimerTask = new NearbyShoptTimerTask();
+    mNearbyShopRunnable = new NearbyShopRunnable();
+    timer.schedule(mNearbyShoptTimerTask, 10000, 10000);
   }
 
 }
