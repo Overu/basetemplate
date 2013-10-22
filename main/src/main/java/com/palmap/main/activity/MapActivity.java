@@ -24,7 +24,8 @@ import android.view.MotionEvent;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class MapActivity extends PublicActivity implements PositionListenerDelegate {
+public class MapActivity extends PublicActivity implements
+    PositionListenerDelegate {
 
   @InjectView(tag = "acntivity_map_layout_macromap_tag")
   @Nullable
@@ -129,7 +130,8 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
     mZoomin.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        mMapService.zoomin();
+//        mMapService.zoomin();
+        mMapService.getCurFloor().onDrawPositionLayerTest();
       }
     });
     mZoomout.setOnClickListener(new OnClickListener() {
@@ -163,19 +165,21 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
   }
 
   private void location() {
-    if (wifiController.isConnection()) {
-      return;
-    }
-    wifiController.start();
+    // if (wifiController.isConnection()) {
+    // return;
+    // }
+    // wifiController.start();
     // String floorid = "18";
     // float x = 15202;
     // float y = 7447;
-    // String floorid = "114";
+    String floorid = "114";
+    float x = 157;
+    float y = 65;
     // float x = 4046;
     // float y = 1676;
     // float x = 15202;
     // float y = 7447;
-    // mMapService.setPosition(floorid, x, y);
+    mMapService.setPosition(floorid, x, y);
   }
 
   private void processLoaction(Intent intent) {
