@@ -9,7 +9,14 @@ import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.Constant;
 import com.palmap.main.utils.NearbyShopController;
 import com.palmap.main.utils.WifiPositionController;
+import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
+import com.siemens.wifiposition.Position;
+
 import javax.annotation.Nullable;
+
+import android.widget.TextView;
+
+import android.os.Handler;
 
 import android.util.Log;
 
@@ -20,7 +27,7 @@ import roboguice.inject.InjectView;
 import android.content.Intent;
 import android.view.View;
 
-public class HomeActivity extends PublicActivity implements OnClickListener {
+public class HomeActivity extends PublicActivity implements OnClickListener, PositionListenerDelegate {
 
   @InjectView(tag = "activity_home_layout_stop_button_tag")
   @Nullable
@@ -37,9 +44,14 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   @InjectView(tag = "activity_home_layout_button_location_tag")
   @Nullable
   ImageButton mLoactionButton;
+  @InjectView(tag = "activity_home_layout_message_text_tag")
+  @Nullable
+  TextView mMessageText;
 
   @Inject
   NearbyShopController nearbyShopController;
+
+  private Handler mHandler = new Handler();
 
   private Intent mHomeIntent;
 
@@ -89,6 +101,8 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
       // Log.w("nearbyShop:", nearbyShop == null ? "null" :
       // nearbyShop.getName());
       nearbyShopController.start();
+      wifiPositionController.setOnPositionListener(this);
+      wifiPositionController.start();
     } else if (id == R.id.activity_home_layout_more_button) {
       // mHomeIntent = new Intent(this, DetailActivity.class);
       mHomeIntent = new Intent(this, BrandWallActivity.class);
@@ -98,6 +112,18 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
       return;
     }
     startActivity(mHomeIntent);
+  }
+
+  @Override
+  public void onPositionReceived(final Position postion, String str) {
+    Log.w("HomeActivity", "HomeActivity onPositionReceived:" + postion.x + "--" + postion.y);
+    Log.w("HomeActivity", "HomeActivity onPositionReceived");
+    mHandler.post(new Runnable() {
+      @Override
+      public void run() {
+        mMapService.setPositionLazy("114", postion.x, postion.y);
+      }
+    });
   }
 
   @Override
@@ -117,6 +143,8 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
 
     if (mMapService.getMap() != null) {
       this.parseMapData();
+      mMapService.setMapScale(10);
+      mMapService.setMapOffset(-160, -100);
     }
 
     mStopButton.setOnClickListener(this);
@@ -130,6 +158,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
       @Override
       public void callback(Shop shop) {
         Log.w("nearbyShopController", shop.getName());
+        mMessageText.setText(shop.getName());
       }
     });
   }
@@ -148,6 +177,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener {
   protected void onPause() {
     super.onPause();
     nearbyShopController.stop();
+    wifiPositionController.stop();
   }
 
   @Override

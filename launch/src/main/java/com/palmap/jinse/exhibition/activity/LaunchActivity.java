@@ -38,7 +38,7 @@ public class LaunchActivity extends RoboActivity implements MapLoadStatusListene
     super.onCreate(savedInstanceState);
 
     mMapService.setOnMapLoadStatusListener(this);
-    mMapService.initMapData("3", "文渊楼");
+    mMapService.initMapData("10", "文渊楼");
   }
 
   private void goHome() {

@@ -62,8 +62,8 @@ public class BrandWallActivity extends PublicActivity {
 
   /** 给GridView添加数据 */
   private void setData() {
-    float x = 15202;
-    float y = 7447;
+    float x = 157;
+    float y = 65;
     activity_brandwall_layout_gridview_list = mMapService.getShopsByScope(x, y, 100);
     // for (int i = 0; i < activity_brandwall_layout_gridview_list_logo.length; i++) {
     // HashMap<String, Object> hm = new HashMap<String, Object>();

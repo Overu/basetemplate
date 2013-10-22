@@ -61,7 +61,6 @@ public class WifiPositionController implements PositionListener {
   @Override
   public void onError(int arg0) {
     Log.w("onError", arg0 + "");
-
   }
 
   @Override
@@ -84,7 +83,7 @@ public class WifiPositionController implements PositionListener {
     }
     isConnection = true;
     wifiPosMananger.init(serverIp, serverProt, this);
-    wifiPosMananger.setPositionInterval(2000);
+    wifiPosMananger.setPositionInterval(1500);
     wifiPosMananger.start();
   }
 

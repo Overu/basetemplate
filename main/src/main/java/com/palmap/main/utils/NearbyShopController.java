@@ -3,15 +3,14 @@ package com.palmap.main.utils;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-
 import com.macrowen.macromap.draw.Shop;
 import com.macrowen.macromap.utils.MapService;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.util.Log;
 
+import android.graphics.PointF;
 import android.os.Handler;
 
 @Singleton
@@ -27,6 +26,10 @@ public class NearbyShopController {
       if (callback == null) {
         return;
       }
+      PointF positionPoint = mMapService.getPostition();
+      if (positionPoint == null) {
+        return;
+      }
       mHandler.post(mNearbyShopRunnable);
     }
   }
@@ -34,10 +37,12 @@ public class NearbyShopController {
   class NearbyShopRunnable implements Runnable {
     @Override
     public void run() {
-      float x = 15202;
-      float y = 7447;
-      Log.w("NearbyShopRunnable", "callback");
-      Shop nearbyShop = mMapService.getNearbyShop(x, y, 0);
+      // float x = 159;
+      // float y = 66;
+      // Log.w("NearbyShopRunnable", "callback");
+      PointF postition = mMapService.getPostition();
+      Log.w("NearbyShopRunnable", postition.x + "callback" + postition.y);
+      Shop nearbyShop = mMapService.getNearbyShop(postition.x, postition.y, 0);
       if (nearbyShop == null) {
         return;
       }
@@ -51,6 +56,8 @@ public class NearbyShopController {
   private Handler mHandler;
   private NearbyShopRunnable mNearbyShopRunnable;
   private MapService mMapService = MapService.getInstance();
+
+  private boolean isStart = false;
 
   Injector injector;
 
@@ -79,13 +86,25 @@ public class NearbyShopController {
     this.callback = callback;
   }
 
+  public void setPointF() {
+
+  }
+
   public void start() {
+    if (isStart) {
+      return;
+    }
+    isStart = true;
     timer = injector.getInstance(Timer.class);
     nearbyShopTimerTask = new NearbyShopTimerTask();
     timer.schedule(nearbyShopTimerTask, 10000, 10000);
   }
 
   public void stop() {
+    if (!isStart) {
+      return;
+    }
+    isStart = false;
     if (nearbyShopTimerTask != null) {
       nearbyShopTimerTask.cancel();
       nearbyShopTimerTask = null;

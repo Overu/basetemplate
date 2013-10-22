@@ -24,8 +24,7 @@ import android.view.MotionEvent;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class MapActivity extends PublicActivity implements
-    PositionListenerDelegate {
+public class MapActivity extends PublicActivity implements PositionListenerDelegate {
 
   @InjectView(tag = "acntivity_map_layout_macromap_tag")
   @Nullable
@@ -58,7 +57,7 @@ public class MapActivity extends PublicActivity implements
     mHandler.post(new Runnable() {
       @Override
       public void run() {
-        mMapService.setPositionTest("29", position.x * 10, position.y * 10);
+        mMapService.setPositionTest("114", position.x, position.y);
       }
     });
   }
@@ -116,6 +115,7 @@ public class MapActivity extends PublicActivity implements
     mMapService.setOnMapFloorChangedListener(new OnMapFloorChangedListener() {
       @Override
       public void OnMapFloorChanged(String fromFloorid, String toFloorid) {
+        wifiController.stop();
       }
     });
 
@@ -163,19 +163,19 @@ public class MapActivity extends PublicActivity implements
   }
 
   private void location() {
-    // if (wifiController.isConnection()) {
-    // return;
-    // }
-    // wifiController.start();
+    if (wifiController.isConnection()) {
+      return;
+    }
+    wifiController.start();
     // String floorid = "18";
     // float x = 15202;
     // float y = 7447;
-    String floorid = "19";
+    // String floorid = "114";
     // float x = 4046;
     // float y = 1676;
-    float x = 15202;
-    float y = 7447;
-    mMapService.setPosition(floorid, x, y);
+    // float x = 15202;
+    // float y = 7447;
+    // mMapService.setPosition(floorid, x, y);
   }
 
   private void processLoaction(Intent intent) {
