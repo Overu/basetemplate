@@ -1,0 +1,30 @@
+{
+  "style" : {
+    "frame" : {
+      "borderColor" : "28,35,71",
+      "fillColor" : "254,254,254",
+      "borderStyle" : "solid",
+      "borderWidth" : 1.5
+    },
+    "shop" : {
+      "category" : {
+        "25000" : "224,214,186",
+        "25001" : "255,255,255"
+      },
+      "fontSize" : 12,
+      "fillColor" : "255,235,190",
+      "fontName" : "STHeitiSC-Medium",
+      "borderColor" : "145,138,127",
+      "borderWidth" : 1,
+      "borderStyle" : "solid",
+      "textColor" : "137,112,68"
+    },
+    "facility" : {
+      "fontSize" : 22,
+      "fontName" : "PalmapPublic",
+      "backColor" : "0000FF",
+      "textColor" : "FFFFFF",
+      "opaque" : true
+    }
+  }
+}

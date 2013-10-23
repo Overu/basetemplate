@@ -97,7 +97,7 @@ public class NearbyShopController {
     isStart = true;
     timer = injector.getInstance(Timer.class);
     nearbyShopTimerTask = new NearbyShopTimerTask();
-    timer.schedule(nearbyShopTimerTask, 10000, 10000);
+    timer.schedule(nearbyShopTimerTask, 5000, 5000);
   }
 
   public void stop() {

@@ -106,6 +106,11 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
     } else if (id == R.id.activity_home_layout_more_button) {
       // mHomeIntent = new Intent(this, DetailActivity.class);
       mHomeIntent = new Intent(this, BrandWallActivity.class);
+      // DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
+      // float xdpi = displayMetrics.xdpi;
+      // float ydpi = displayMetrics.ydpi;
+      // Log.w("xdpi", xdpi + "");
+      // Log.w("ydpi", ydpi + "");
     }
 
     if (mHomeIntent == null) {
@@ -143,8 +148,8 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
 
     if (mMapService.getMap() != null) {
       this.parseMapData();
-      mMapService.setMapScale(10);
-      mMapService.setMapOffset(-160, -100);
+      // mMapService.setMapScale(10);
+      mMapService.setMapOffset(-180, -350);
     }
 
     mStopButton.setOnClickListener(this);

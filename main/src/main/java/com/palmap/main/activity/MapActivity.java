@@ -13,6 +13,8 @@ import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
 import com.siemens.wifiposition.Position;
 import javax.annotation.Nullable;
 
+import android.util.DisplayMetrics;
+
 import android.os.Handler;
 
 import android.util.Log;
@@ -24,8 +26,7 @@ import android.view.MotionEvent;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class MapActivity extends PublicActivity implements
-    PositionListenerDelegate {
+public class MapActivity extends PublicActivity implements PositionListenerDelegate {
 
   @InjectView(tag = "acntivity_map_layout_macromap_tag")
   @Nullable
@@ -130,7 +131,7 @@ public class MapActivity extends PublicActivity implements
     mZoomin.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-//        mMapService.zoomin();
+        // mMapService.zoomin();
         mMapService.getCurFloor().onDrawPositionLayerTest();
       }
     });
@@ -165,21 +166,21 @@ public class MapActivity extends PublicActivity implements
   }
 
   private void location() {
-    // if (wifiController.isConnection()) {
-    // return;
-    // }
-    // wifiController.start();
+    if (wifiController.isConnection()) {
+      return;
+    }
+    wifiController.start();
     // String floorid = "18";
     // float x = 15202;
     // float y = 7447;
-    String floorid = "114";
-    float x = 157;
-    float y = 65;
+    // String floorid = "114";
+    // float x = 157;
+    // float y = 65;
     // float x = 4046;
     // float y = 1676;
     // float x = 15202;
     // float y = 7447;
-    mMapService.setPosition(floorid, x, y);
+    // mMapService.setPosition(floorid, x, y);
   }
 
   private void processLoaction(Intent intent) {

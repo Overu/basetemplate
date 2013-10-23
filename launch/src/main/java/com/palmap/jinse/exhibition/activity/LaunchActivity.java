@@ -1,6 +1,7 @@
 package com.palmap.jinse.exhibition.activity;
 
 import com.macrowen.macromap.draw.Map;
+import com.macrowen.macromap.utils.ColorConfigures;
 import com.macrowen.macromap.utils.MapService;
 import com.macrowen.macromap.utils.MapService.MapLoadStatus;
 import com.macrowen.macromap.utils.MapService.MapLoadStatusListener;
@@ -36,9 +37,14 @@ public class LaunchActivity extends RoboActivity implements MapLoadStatusListene
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ColorConfigures colorConfigures = new ColorConfigures(this, "configure.json");
+    mMapService.addColorConfigures(colorConfigures);
 
     mMapService.setOnMapLoadStatusListener(this);
     mMapService.initMapData("10", "文渊楼");
+    // String aa = colorConfigures.getFrameConfigure("borderColor");
+    // int color = colorConfigures.getColor(aa);
+    // String s = "";
   }
 
   private void goHome() {
