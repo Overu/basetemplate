@@ -13,6 +13,8 @@ import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
 import com.siemens.wifiposition.Position;
 import javax.annotation.Nullable;
 
+import android.widget.ToggleButton;
+
 import android.util.DisplayMetrics;
 
 import android.os.Handler;
@@ -39,7 +41,7 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
   ImageButton mZoomin;
   @InjectView(tag = "acntivity_map_button_position_tag")
   @Nullable
-  ImageButton mPosition;
+  ToggleButton mPosition;
 
   // @Inject
   // WifiPositionManager wifiPosManager;
@@ -52,6 +54,11 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
   private MapService mMapService = MapService.getInstance();
 
   @Override
+  public void onError(int error) {
+    mPosition.setChecked(false);
+  }
+
+  @Override
   public void onPositionReceived(final Position position, String floorid) {
     Log.w("onPositionReceived", position.x + "_" + position.y);
     Log.w("floorid", floorid);
@@ -59,7 +66,7 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
     mHandler.post(new Runnable() {
       @Override
       public void run() {
-        mMapService.setPositionTest("114", position.x, position.y);
+        mMapService.setPositionTest("115", position.x, position.y);
       }
     });
   }
@@ -125,14 +132,18 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
 
       @Override
       public void onClick(View v) {
-        location();
+        if (mPosition.isChecked()) {
+          location();
+        } else {
+          wifiController.stop();
+        }
       }
     });
     mZoomin.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        // mMapService.zoomin();
-        mMapService.getCurFloor().onDrawPositionLayerTest();
+        mMapService.zoomin();
+        // mMapService.getCurFloor().onDrawPositionLayerTest();
       }
     });
     mZoomout.setOnClickListener(new OnClickListener() {
@@ -162,6 +173,16 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
     super.onPause();
     if (wifiController.isConnection()) {
       wifiController.stop();
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if (wifiController.isConnection()) {
+      mPosition.setChecked(true);
+    } else {
+      mPosition.setChecked(false);
     }
   }
 

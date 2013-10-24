@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import android.graphics.PointF;
+
 import roboguice.inject.InjectView;
 
 import android.widget.ArrayAdapter;
@@ -62,8 +64,13 @@ public class BrandWallActivity extends PublicActivity {
 
   /** 给GridView添加数据 */
   private void setData() {
-    float x = 157;
-    float y = 65;
+    float x = 38 * 100;
+    float y = 19 * 100;
+    PointF position = mMapService.getPostition();
+    if (position != null) {
+      x = position.x;
+      y = position.y;
+    }
     activity_brandwall_layout_gridview_list = mMapService.getShopsByScope(x, y, 100);
     // for (int i = 0; i < activity_brandwall_layout_gridview_list_logo.length; i++) {
     // HashMap<String, Object> hm = new HashMap<String, Object>();
@@ -91,5 +98,4 @@ public class BrandWallActivity extends PublicActivity {
     activity_brandwall_layout_gridview.setOnItemClickListener(onItemClickListener);
 
   }
-
 }

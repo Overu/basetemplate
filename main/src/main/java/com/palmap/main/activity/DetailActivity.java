@@ -2,12 +2,24 @@ package com.palmap.main.activity;
 
 import com.google.inject.Inject;
 
+import com.macrowen.macromap.draw.Shop;
+import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.ImageDownloader;
 import com.palmap.main.utils.ImageDownloader.Mode;
 import com.palmap.main.view.CirclePageIndicator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nullable;
+
+import android.widget.TextView;
+
+import android.widget.ToggleButton;
+
+import android.content.Intent;
+
+import android.graphics.PointF;
+
 import android.widget.ImageView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -66,9 +78,24 @@ public class DetailActivity extends PublicActivity {
   @InjectView(tag = "indicator_tag")
   @Nullable
   CirclePageIndicator mIndicator;
+  @InjectView(tag = "activity_detail_layout_shop_name_tag")
+  @Nullable
+  TextView mShopName;
 
   @Inject
   LayoutInflater layoutInflater;
+
+  private MapService mMapService = MapService.getInstance();
+  private String downLoadURL;
+
+  private Runnable downloadThread = new Runnable() {
+
+    @Override
+    public void run() {
+
+    }
+
+  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +104,18 @@ public class DetailActivity extends PublicActivity {
     setTitle("展品详情");
     enableBack(true);
     imageDownloader.setMode(Mode.NO_DOWNLOADED_DRAWABLE);
+
+    Intent intent = getIntent();
+    String shopId = intent.getStringExtra("shopid");
+    if (shopId != null && !(shopId.equals("") || shopId.equals("0"))) {
+      HashMap<PointF, Shop> shops = mMapService.getCurFloor().getShops();
+      for (Shop shop : shops.values()) {
+        if (shop.getId().equals(shopId)) {
+          mShopName.setText(shop.getName());
+          break;
+        }
+      }
+    }
 
     DetailImageAdapter adapter = new DetailImageAdapter();
     for (int i = 0; i < 4; i++) {
@@ -88,5 +127,10 @@ public class DetailActivity extends PublicActivity {
 
     mIndicator.setViewPager(mPager);
     mIndicator.setSnap(true);
+  }
+
+  private void downlaodJson(String mallid, String floorId) {
+    downLoadURL = "http://apitest.palmap.cn/mall/" + mallid + "/floor/" + floorId;
+    new Thread(downloadThread).start();
   }
 }

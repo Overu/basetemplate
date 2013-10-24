@@ -20,6 +20,8 @@ import android.content.res.Resources;
 public class WifiPositionController implements PositionListener {
 
   public interface PositionListenerDelegate {
+    public void onError(int error);
+
     public void onPositionReceived(Position postion, String str);
   }
 
@@ -61,6 +63,8 @@ public class WifiPositionController implements PositionListener {
   @Override
   public void onError(int arg0) {
     Log.w("onError", arg0 + "");
+    this.stop();
+    this.listener.onError(arg0);
   }
 
   @Override

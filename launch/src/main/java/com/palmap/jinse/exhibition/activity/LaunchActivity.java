@@ -41,7 +41,7 @@ public class LaunchActivity extends RoboActivity implements MapLoadStatusListene
     mMapService.addColorConfigures(colorConfigures);
 
     mMapService.setOnMapLoadStatusListener(this);
-    mMapService.initMapData("10", "文渊楼");
+    mMapService.initMapData("11", "金色半山");
     // String aa = colorConfigures.getFrameConfigure("borderColor");
     // int color = colorConfigures.getColor(aa);
     // String s = "";

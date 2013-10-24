@@ -43,9 +43,10 @@ public class NearbyShopController {
       PointF postition = mMapService.getPostition();
       Log.w("NearbyShopRunnable", postition.x + "callback" + postition.y);
       Shop nearbyShop = mMapService.getNearbyShop(postition.x, postition.y, 0);
-      if (nearbyShop == null) {
+      if (nearbyShop == null || (mCurShop != null && mCurShop == nearbyShop)) {
         return;
       }
+      mCurShop = nearbyShop;
       callback.callback(nearbyShop);
     }
   }
@@ -56,6 +57,8 @@ public class NearbyShopController {
   private Handler mHandler;
   private NearbyShopRunnable mNearbyShopRunnable;
   private MapService mMapService = MapService.getInstance();
+
+  private Shop mCurShop;
 
   private boolean isStart = false;
 

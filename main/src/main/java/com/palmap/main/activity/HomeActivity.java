@@ -14,8 +14,17 @@ import com.siemens.wifiposition.Position;
 
 import javax.annotation.Nullable;
 
+import android.graphics.Color;
+
+import android.view.animation.AnimationUtils;
+
+import android.view.Gravity;
+
 import android.widget.TextView;
 
+import android.widget.ViewSwitcher.ViewFactory;
+
+import android.widget.TextSwitcher;
 import android.os.Handler;
 
 import android.util.Log;
@@ -27,7 +36,7 @@ import roboguice.inject.InjectView;
 import android.content.Intent;
 import android.view.View;
 
-public class HomeActivity extends PublicActivity implements OnClickListener, PositionListenerDelegate {
+public class HomeActivity extends PublicActivity implements OnClickListener, PositionListenerDelegate, ViewFactory {
 
   @InjectView(tag = "activity_home_layout_stop_button_tag")
   @Nullable
@@ -46,7 +55,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
   ImageButton mLoactionButton;
   @InjectView(tag = "activity_home_layout_message_text_tag")
   @Nullable
-  TextView mMessageText;
+  TextSwitcher mMessageText;
 
   @Inject
   NearbyShopController nearbyShopController;
@@ -55,10 +64,20 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
 
   private Intent mHomeIntent;
 
+  // private int mCounter;
+
   @Inject
   WifiPositionController wifiPositionController;
 
   private MapService mMapService = MapService.getInstance();
+
+  @Override
+  public View makeView() {
+    TextView t = new TextView(this);
+    t.setTextSize(18);
+    t.setTextColor(Color.rgb(255, 255, 255));
+    return t;
+  }
 
   @Override
   public void onClick(View v) {
@@ -100,9 +119,13 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
       // Shop nearbyShop = mMapService.getNearbyShop(x, y, 0);
       // Log.w("nearbyShop:", nearbyShop == null ? "null" :
       // nearbyShop.getName());
+
       nearbyShopController.start();
       wifiPositionController.setOnPositionListener(this);
       wifiPositionController.start();
+
+      // mCounter++;
+      // mMessageText.setText(String.valueOf(mCounter));
     } else if (id == R.id.activity_home_layout_more_button) {
       // mHomeIntent = new Intent(this, DetailActivity.class);
       mHomeIntent = new Intent(this, BrandWallActivity.class);
@@ -120,13 +143,18 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
   }
 
   @Override
+  public void onError(int error) {
+
+  }
+
+  @Override
   public void onPositionReceived(final Position postion, String str) {
     Log.w("HomeActivity", "HomeActivity onPositionReceived:" + postion.x + "--" + postion.y);
     Log.w("HomeActivity", "HomeActivity onPositionReceived");
     mHandler.post(new Runnable() {
       @Override
       public void run() {
-        mMapService.setPositionLazy("114", postion.x, postion.y);
+        mMapService.setPositionLazy("115", postion.x, postion.y);
       }
     });
   }
@@ -136,6 +164,10 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
     setTitle(this.getResources().getString(R.string.string_activity_home_title_layout_textview));
+
+    mMessageText.setFactory(this);
+    mMessageText.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left));
+    mMessageText.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right));
 
     setDetailButtonListener(new View.OnClickListener() {
 
