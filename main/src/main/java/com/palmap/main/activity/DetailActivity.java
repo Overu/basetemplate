@@ -11,15 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nullable;
-
 import android.widget.TextView;
-
-import android.widget.ToggleButton;
-
 import android.content.Intent;
-
 import android.graphics.PointF;
-
 import android.widget.ImageView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

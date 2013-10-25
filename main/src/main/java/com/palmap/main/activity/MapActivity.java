@@ -12,13 +12,8 @@ import com.palmap.main.utils.WifiPositionController;
 import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
 import com.siemens.wifiposition.Position;
 import javax.annotation.Nullable;
-
 import android.widget.ToggleButton;
-
-import android.util.DisplayMetrics;
-
 import android.os.Handler;
-
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,7 +61,7 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
     mHandler.post(new Runnable() {
       @Override
       public void run() {
-        mMapService.setPositionTest("115", position.x, position.y);
+        mMapService.setPositionTest("114", position.x, position.y);
       }
     });
   }
@@ -156,10 +151,10 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
 
   @Override
   protected void onDestroy() {
+    super.onDestroy();
     if (wifiController.isConnection()) {
       wifiController.stop();
     }
-    super.onDestroy();
     mMapService.flrushView();
   }
 

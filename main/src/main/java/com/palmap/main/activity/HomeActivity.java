@@ -11,24 +11,14 @@ import com.palmap.main.utils.NearbyShopController;
 import com.palmap.main.utils.WifiPositionController;
 import com.palmap.main.utils.WifiPositionController.PositionListenerDelegate;
 import com.siemens.wifiposition.Position;
-
 import javax.annotation.Nullable;
-
 import android.graphics.Color;
-
 import android.view.animation.AnimationUtils;
-
-import android.view.Gravity;
-
 import android.widget.TextView;
-
 import android.widget.ViewSwitcher.ViewFactory;
-
 import android.widget.TextSwitcher;
 import android.os.Handler;
-
 import android.util.Log;
-
 import android.util.DisplayMetrics;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -154,7 +144,7 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
     mHandler.post(new Runnable() {
       @Override
       public void run() {
-        mMapService.setPositionLazy("115", postion.x, postion.y);
+        mMapService.setPositionLazy("114", postion.x, postion.y);
       }
     });
   }
@@ -205,7 +195,6 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
     super.onDestroy();
     wifiPositionController.destory();
     mMapService.destory();
-    mMapService = null;
     nearbyShopController.destory();
     android.os.Process.killProcess(android.os.Process.myPid());
   }
