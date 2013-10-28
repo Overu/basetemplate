@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import android.os.Bundle;
 
 import com.macrowen.macromap.draw.Shop;
-import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.Constant;
 import com.palmap.main.utils.NearbyShopController;
 import com.palmap.main.utils.WifiPositionController;
@@ -58,8 +57,6 @@ public class HomeActivity extends PublicActivity implements OnClickListener, Pos
 
   @Inject
   WifiPositionController wifiPositionController;
-
-  private MapService mMapService = MapService.getInstance();
 
   @Override
   public View makeView() {

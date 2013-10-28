@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.macrowen.macromap.MacroMap;
 import com.macrowen.macromap.MacroMap.OnMapEventType;
 import com.macrowen.macromap.draw.ShopPosition.OnMapEventListener;
-import com.macrowen.macromap.utils.MapService;
 import com.macrowen.macromap.utils.MapService.OnMapFloorChangedListener;
 import com.palmap.main.utils.Constant;
 import com.palmap.main.utils.WifiPositionController;
@@ -46,8 +45,6 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
 
   private Handler mHandler = new Handler();
 
-  private MapService mMapService = MapService.getInstance();
-
   @Override
   public void onError(int error) {
     mPosition.setChecked(false);
@@ -84,7 +81,14 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
 
     wifiController.setOnPositionListener(this);
 
-    processLoaction(getIntent());
+    Intent intent = getIntent();
+    processLoaction(intent);
+
+    String shopId = intent.getStringExtra("shopid");
+    String floorId = intent.getStringExtra("floorid");
+    if ((shopId != null && !shopId.isEmpty()) && (floorId != null && !floorId.isEmpty())) {
+      mMapService.setShop(floorId, shopId);
+    }
 
     // String serverIp =
     // getResources().getString(R.string.position_server_adress);
@@ -106,10 +110,12 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
       public void OnMapEvent(String id, OnMapEventType type) {
         if (type == OnMapEventType.MapClickedLeft) {
           Intent intent = new Intent(getBaseContext(), DetailActivity.class);
+          intent.putExtra("floorid", mMapService.getFloorId());
           intent.putExtra("shopid", "" + id);
           startActivity(intent);
         } else if (type == OnMapEventType.MapClickedRight) {
           Intent intent = new Intent(getBaseContext(), DetailActivity.class);
+          intent.putExtra("floorid", mMapService.getFloorId());
           intent.putExtra("shopid", "" + id);
           startActivity(intent);
         }
@@ -161,6 +167,13 @@ public class MapActivity extends PublicActivity implements PositionListenerDeleg
   @Override
   protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
+    processLoaction(intent);
+
+    String shopId = intent.getStringExtra("shopid");
+    String floorId = intent.getStringExtra("floorid");
+    if ((shopId != null && !shopId.isEmpty()) && (floorId != null && !floorId.isEmpty())) {
+      mMapService.setShop(floorId, shopId);
+    }
   }
 
   @Override

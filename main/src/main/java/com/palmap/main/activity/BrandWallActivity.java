@@ -1,7 +1,6 @@
 package com.palmap.main.activity;
 
 import com.macrowen.macromap.draw.Shop;
-import com.macrowen.macromap.utils.MapService;
 
 import java.util.List;
 
@@ -31,8 +30,6 @@ public class BrandWallActivity extends PublicActivity {
   /** 品牌墙页面 BrandWallActivity 品牌墙资源 */
   private List<Shop> activity_brandwall_layout_gridview_list;
 
-  private MapService mMapService = MapService.getInstance();
-
   /** 品牌墙 logo图片资源 */
   // private int activity_brandwall_layout_gridview_list_logo[] = {
   // R.drawable.logo_converse, R.drawable.logo_costa_coffee, R.drawable.logo_dairy_queen, R.drawable.logo_dairy_queen,
@@ -48,6 +45,9 @@ public class BrandWallActivity extends PublicActivity {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
       /** 跳转到详细界面 */
       activity_brandwall_intent = new Intent(BrandWallActivity.this, DetailActivity.class);
+      activity_brandwall_intent.putExtra("floorid", mMapService.getFloorId());
+      Shop shop = activity_brandwall_layout_gridview_list.get((int) id);
+      activity_brandwall_intent.putExtra("shopid", "" + shop.getId());
       startActivity(activity_brandwall_intent);
     }
   };

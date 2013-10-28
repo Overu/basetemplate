@@ -1,5 +1,7 @@
 package com.palmap.main.activity;
 
+import com.macrowen.macromap.utils.MapService;
+
 import android.view.View;
 
 import android.view.View.OnClickListener;
@@ -25,6 +27,8 @@ public class PublicActivity extends RoboActivity {
   ImageButton mDetailButton;
   @InjectView(tag = "activity_home_title_layout_btn_back_tag")
   ImageButton mBackButton;
+
+  protected MapService mMapService = MapService.getInstance();
 
   public void enableBack(boolean enable) {
     mBackButton.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);

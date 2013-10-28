@@ -3,7 +3,6 @@ package com.palmap.main.activity;
 import com.google.inject.Inject;
 
 import com.macrowen.macromap.draw.Shop;
-import com.macrowen.macromap.utils.MapService;
 import com.palmap.main.utils.ImageDownloader;
 import com.palmap.main.utils.ImageDownloader.Mode;
 import com.palmap.main.view.CirclePageIndicator;
@@ -11,6 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nullable;
+
+import android.view.View.OnClickListener;
+
+import android.widget.Button;
+
 import android.widget.TextView;
 import android.content.Intent;
 import android.graphics.PointF;
@@ -23,7 +27,7 @@ import android.support.v4.view.ViewPager;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
 
-public class DetailActivity extends PublicActivity {
+public class DetailActivity extends PublicActivity implements OnClickListener {
 
   public class DetailImageAdapter extends PagerAdapter {
 
@@ -75,11 +79,16 @@ public class DetailActivity extends PublicActivity {
   @InjectView(tag = "activity_detail_layout_shop_name_tag")
   @Nullable
   TextView mShopName;
+  @InjectView(tag = "detail_button_location_tag")
+  @Nullable
+  Button mShopLocation;
 
   @Inject
   LayoutInflater layoutInflater;
 
-  private MapService mMapService = MapService.getInstance();
+  private String shopId;
+  private String floorId;
+
   private String downLoadURL;
 
   private Runnable downloadThread = new Runnable() {
@@ -92,6 +101,23 @@ public class DetailActivity extends PublicActivity {
   };
 
   @Override
+  public void onClick(View v) {
+    int id = v.getId();
+
+    Intent intent = null;
+    if (id == R.id.detail_button_location) {
+      intent = new Intent(this, MapActivity.class);
+      intent.putExtra("shopid", shopId);
+      intent.putExtra("floorid", floorId);
+    }
+
+    if (intent == null) {
+      return;
+    }
+    startActivity(intent);
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_detail);
@@ -100,7 +126,8 @@ public class DetailActivity extends PublicActivity {
     imageDownloader.setMode(Mode.NO_DOWNLOADED_DRAWABLE);
 
     Intent intent = getIntent();
-    String shopId = intent.getStringExtra("shopid");
+    shopId = intent.getStringExtra("shopid");
+    floorId = intent.getStringExtra("floorid");
     if (shopId != null && !(shopId.equals("") || shopId.equals("0"))) {
       HashMap<PointF, Shop> shops = mMapService.getCurFloor().getShops();
       for (Shop shop : shops.values()) {
@@ -121,6 +148,8 @@ public class DetailActivity extends PublicActivity {
 
     mIndicator.setViewPager(mPager);
     mIndicator.setSnap(true);
+
+    mShopLocation.setOnClickListener(this);
   }
 
   private void downlaodJson(String mallid, String floorId) {
